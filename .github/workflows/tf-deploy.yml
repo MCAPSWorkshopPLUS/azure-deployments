@@ -7,24 +7,24 @@ on:
   workflow_dispatch:
 
 permissions:
+  id-token: write
   contents: read
 
 jobs:
   terraform:
     name: Terraform Init / Plan / Apply
-    runs-on: self-hosted   # ✅ MUST be an Azure VM / VMSS runner
-
-    env:
-      # Managed Identity authentication
-      ARM_USE_MSI: "true"
-
-      # Required context
-      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      ARM_TENANT_ID:       ${{ secrets.AZURE_TENANT_ID }}
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v3
