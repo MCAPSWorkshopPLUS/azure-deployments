@@ -18,7 +18,7 @@ module "avm-res-network-virtualnetwork" {
   subnets = {
     subnet1 =  {
       name             = var.subnet_name
-      address_prefixes = var.subnet_address_prefixes
+      address_prefixes = var.subnet_address_prefix
     }
   }
 }
