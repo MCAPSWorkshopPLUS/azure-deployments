@@ -14,6 +14,7 @@ terraform {
     container_name       = "tsstate"
     key                  = "azure-deployments.tfstate"
     use_oidc             = true
+    use_azuread_auth     = true
   }
 }
 
