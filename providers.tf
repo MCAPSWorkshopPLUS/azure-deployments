@@ -13,11 +13,12 @@ terraform {
     storage_account_name = "tfstate04022026olowosam"
     container_name       = "tsstate"
     key                  = "azure-deployments.tfstate"
+    use_oidc             = true
   }
 }
 
 provider "azurerm" {
   features {}
-  use_msi      = true
-  msi_endpoint = "http://169.254.169.254/metadata/identity/oauth2/token"
+  use_oidc = true
+  use_cli  = false
 }
