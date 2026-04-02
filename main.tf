@@ -10,7 +10,7 @@ module "avm-res-network-virtualnetwork" {
   version = "0.17.1"
   name    = var.vnet_name
 
-  resource_group_name = module.avm-res-resources-resourcegroup
+  parent_id           = module.avm-res-resources-resourcegroup.resource_id
   location            = var.location
   address_space       = var.vnet_address_space
   enable_telemetry = true
